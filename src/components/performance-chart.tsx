@@ -67,18 +67,33 @@ export function PerformanceChart({
   const config = buildConfig(weightMode, items);
   const data = history.length > 0 ? calculateBasketPerformance(history, config) : [];
   const yLabel = weightMode === "dollar" ? "$" : "% Return";
+  const lastValue = data.length > 0 ? data[data.length - 1].value : null;
+  const rangeLabel = RANGES.find((r) => r.value === range)?.label ?? range;
 
   return (
     <div>
-      <Tabs value={range} onValueChange={onRangeChange}>
-        <TabsList>
-          {RANGES.map((r) => (
-            <TabsTrigger key={r.value} value={r.value}>
-              {r.label}
-            </TabsTrigger>
-          ))}
-        </TabsList>
-      </Tabs>
+      <div className="flex items-center justify-between">
+        <Tabs value={range} onValueChange={onRangeChange}>
+          <TabsList>
+            {RANGES.map((r) => (
+              <TabsTrigger key={r.value} value={r.value}>
+                {r.label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </Tabs>
+        {lastValue !== null && (
+          <div className="text-right">
+            <span
+              className="text-2xl font-semibold"
+              style={{ color: lastValue >= 0 ? "#22c55e" : "#ef4444" }}
+            >
+              {lastValue >= 0 ? "+" : ""}{weightMode === "dollar" ? `$${lastValue.toFixed(2)}` : `${lastValue.toFixed(2)}%`}
+            </span>
+            <span className="ml-2 text-sm text-muted-foreground">{rangeLabel}</span>
+          </div>
+        )}
+      </div>
 
       <div className="mt-4 h-[300px]">
         {loading ? (
@@ -123,7 +138,7 @@ export function PerformanceChart({
               <Line
                 type="monotone"
                 dataKey="value"
-                stroke="hsl(var(--primary))"
+                stroke="var(--chart-1)"
                 strokeWidth={2}
                 dot={false}
               />

@@ -20,10 +20,7 @@ export function calculateBasketPerformance(
   for (const entry of history) {
     const dateMap = new Map<string, number>();
     for (const q of entry.quotes) {
-      const dateStr =
-        typeof q.date === "string"
-          ? q.date
-          : new Date(q.date).toISOString().split("T")[0];
+      const dateStr = new Date(q.date).toISOString().split("T")[0];
       if (q.close != null) {
         dateMap.set(dateStr, q.close);
         allDates.add(dateStr);

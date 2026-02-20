@@ -88,6 +88,7 @@ export function BasketCard({ basket }: { basket: Basket }) {
                 >
                   {isPositive ? "+" : ""}
                   {lastValue?.toFixed(2)}%
+                  <span className="ml-1 text-muted-foreground font-normal">1M</span>
                 </span>
               </>
             )}
