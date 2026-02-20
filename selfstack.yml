@@ -1,0 +1,12 @@
+name: track-basket
+display_name: Track Basket
+description: Local stock basket tracker — create baskets of stocks and track combined performance over time
+version: 0.1.0
+
+runtime:
+  type: docker-compose
+  entry: docker-compose.yml
+
+expose:
+  port: 3000
+  health: /api/health
