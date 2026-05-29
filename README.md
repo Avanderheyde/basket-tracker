@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Basket Tracker
 
-## Getting Started
+A small app for tracking stock baskets, backtests, and strategy-related workflows.
 
-First, run the development server:
+## Why it exists
+
+I wanted a lightweight interface for monitoring baskets and related market data without reaching for a full spreadsheet or internal dashboard.
+
+## What it does
+
+- Create and view baskets of public-market tickers
+- Pull current quotes and historical prices through Yahoo Finance-backed API routes
+- Chart basket performance over selectable time ranges
+- Support equal-weight, custom-weight, and dollar-position basket calculations
+- Run locally or deploy as a small Next.js app
+
+## Status
+
+Experimental / in progress. The current implementation uses local app state and Yahoo Finance data routes; the longer-term design notes live in `docs/plans/`.
+
+## Tech Stack
+
+- Next.js App Router + TypeScript
+- Tailwind CSS + shadcn/ui-style components
+- Recharts for performance charts
+- `yahoo-finance2` for quote, history, and ticker search data
+
+## Local Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Quality Gates
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run lint
+npx jest
+npm run build
+```
